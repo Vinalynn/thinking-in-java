@@ -1,10 +1,16 @@
 package org.vinalynn.thinking_in_java;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,5 +71,15 @@ public class AppTest {
 
 		}
 
+	}
+	
+	@Test
+	public void testImgConventor() throws FileNotFoundException, IOException{
+		//File f = new File(getClass().getResource("base64str").getFile());
+		
+		File f = App.getClassPathFile("base64str");
+		String encodeStr = IOUtils.toString(new FileInputStream(f), "UTF-8");
+		ImgConventor.generateImg(encodeStr, "d:\\", "sdf555few", "JPEG");
+		System.out.println(f.canRead());
 	}
 }
